@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service - AMBILATRES | Global News</title>
+    <link href="https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../homepage/Dubreuil services (1).png">
+    <style>
+        :root {
+            --void: #080808;
+            --power: #ffffff;
+            --accent: #333333;
+            --accent-light: #666666;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Darker Grotesque', sans-serif;
+            background: var(--void);
+            color: var(--power);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        canvas#matrix {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            opacity: 0.07;
+            pointer-events: none;
+            filter: blur(0.5px);
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        header {
+            border-bottom: 1px solid var(--accent);
+            background: rgba(8, 8, 8, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+            color: var(--accent-light);
+        }
+        .top-bar a {
+            color: var(--accent-light);
+            text-decoration: none;
+            margin-left: 1rem;
+            transition: color 0.3s;
+        }
+        .top-bar a:hover { color: var(--power); }
+        .main-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+        }
+        .logo {
+            font-size: 2rem;
+            font-weight: 300;
+            letter-spacing: 0.3em;
+            text-decoration: none;
+            color: var(--power);
+            text-transform: uppercase;
+        }
+        nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+        nav a {
+            color: var(--power);
+            text-decoration: none;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            position: relative;
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--power);
+            transition: width 0.3s;
+        }
+        nav a:hover::after { width: 100%; }
+        .content {
+            padding: 2rem 0;
+            min-height: 60vh;
+            max-width: 800px;
+        }
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 300;
+            margin-bottom: 1rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        .text-section {
+            margin-bottom: 2rem;
+            line-height: 1.6;
+            color: #aaa;
+        }
+        .text-section h2 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            color: var(--power);
+        }
+        .text-section h3 {
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin: 1rem 0 0.5rem 0;
+            color: var(--accent-light);
+        }
+        .text-section p {
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+        .text-section ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .text-section li {
+            margin-bottom: 0.5rem;
+        }
+        footer {
+            border-top: 1px solid var(--accent);
+            padding: 3rem 0;
+            background: rgba(8, 8, 8, 0.9);
+            position: relative;
+            z-index: 10;
+            margin-top: 4rem;
+        }
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+        .footer-links a {
+            color: var(--accent-light);
+            text-decoration: none;
+            margin-right: 1.5rem;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.3s;
+        }
+        .footer-links a:hover { color: var(--power); }
+        .coords {
+            font-size: 0.7rem;
+            color: var(--accent);
+            font-family: monospace;
+        }
+        @media (max-width: 768px) {
+            .main-header { flex-direction: column; gap: 1rem; }
+            nav { flex-wrap: wrap; justify-content: center; gap: 1rem; }
+            .page-title { font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="matrix"></canvas>
+    <header>
+        <div class="container">
+            <div class="top-bar">
+                <div class="date">Saturday, November 29, 2025</div>
+                <div class="top-links">
+                    <a href="../subscribe/index.html">Subscribe</a>
+                    <a href="../login/loginpage.html">Login</a>
+                </div>
+            </div>
+            <div class="main-header">
+                <a href="../homepage/homepage.html" class="logo">AMBILATRES</a>
+                <nav>
+                    <a href="../latest/index.html">Latest</a>
+                    <a href="../business/index.html">Business</a>
+                    <a href="../technology/index.html">Technology</a>
+                    <a href="../politics/index.html">Politics</a>
+                    <a href="../culture/index.html">Culture</a>
+                    <a href="../science/index.html">Science</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="content">
+            <h1 class="page-title">Terms of Service</h1>
+            <div class="text-section">
+                <p><strong>Last Updated: November 29, 2025</strong></p>
+            </div>
+
+            <div class="text-section">
+                <h2>1. Acceptance of Terms</h2>
+                <p>By accessing and using the AMBILATRES website (ambilatres.com), you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.</p>
+            </div>
+
+            <div class="text-section">
+                <h2>2. Use License</h2>
+                <p>Permission is granted to temporarily download one copy of the materials (information or software) on AMBILATRES's website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:</p>
+                <ul>
+                    <li>Modify or copy the materials</li>
+                    <li>Use the materials for any commercial purpose or for any public display</li>
+                    <li>Attempt to decompile or reverse engineer any software contained on the website</li>
+                    <li>Transfer the materials to another person or "mirror" the materials on any other server</li>
+                    <li>Remove or obscure any proprietary notice or other labels on the materials</li>
+                </ul>
+            </div>
+
+            <div class="text-section">
+                <h2>3. Disclaimer</h2>
+                <p>The materials on AMBILATRES's website are provided on an 'as is' basis. AMBILATRES makes no warranties, expressed or implied, and hereby disclaims and negates all other warranties including, without limitation, implied warranties or conditions of merchantability, fitness for a particular purpose, or non-infringement of intellectual property or other violation of rights.</p>
+            </div>
+
+            <div class="text-section">
+                <h2>4. Limitations</h2>
+                <p>In no event shall AMBILATRES or its suppliers be liable for any damages (including, without limitation, damages for loss of data or profit, or due to business interruption) arising out of the use or inability to use the materials on AMBILATRES's website.</p>
+            </div>
+
+            <div class="text-section">
+                <h2>5. Accuracy of Materials</h2>
+                <p>The materials appearing on AMBILATRES's website could include technical, typographical, or photographic errors. AMBILATRES does not warrant that any of the materials on its website are accurate, complete, or current. AMBILATRES may make changes to the materials contained on its website at any time without notice.</p>
+            </div>
+
+            <div class="text-section">
+                <h2>6. Links</h2>
+                <p>AMBILATRES has not reviewed all of the sites linked to its website and is not responsible for the contents of any such linked site. The inclusion of any link does not imply endorsement by AMBILATRES of the site. Use of any such linked website is at the user's own risk.</p>
+            </div>
+
+            <div class="text-section">
+                <h2>7. Modifications</h2>
+                <p>AMBILATRES may revise these terms of service for its website at any time without notice. By using this website, you are agreeing to be bound by the then current version of these terms of service.</p>
+            </div>
+
+            <div class="text-section">
+                <h2>8. Governing Law</h2>
+                <p>These terms and conditions are governed by and construed in accordance with the laws of the jurisdiction in which AMBILATRES operates, and you irrevocably submit to the exclusive jurisdiction of the courts in that location.</p>
+            </div>
+
+            <div class="text-section">
+                <h2>9. Contact Us</h2>
+                <p>If you have any questions about these Terms of Service, please contact us at <a href="mailto:contact@ambilatres.com" style="color: var(--power); text-decoration: underline;">contact@ambilatres.com</a></p>
+            </div>
+        </section>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-links">
+                    <a href="../about/index.html">About Us</a>
+                    <a href="../privacy/index.html">Privacy Policy</a>
+                    <a href="index.html">Terms</a>
+                    <a href="mailto:contact@ambilatres.com">Contact</a>
+                </div>
+                <div class="coords">22°17'56"N 114°10'20"E</div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const chars = '杜脱脱喜欢小咪咪';
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = new Array(Math.floor(columns)).fill(1);
+        function draw() {
+            ctx.fillStyle = 'rgba(8, 8, 8, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#222';
+            ctx.font = `${fontSize}px "PingFang SC", "Microsoft YaHei", monospace`;
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.95)
+                    drops[i] = 0;
+                drops[i]++;
+            }
+        }
+        setInterval(draw, 25);
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
