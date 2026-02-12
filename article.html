@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Business - AMBILATRES | Global News</title>
+    <title>Article - AMBILATRES</title>
     <link href="https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <link rel="icon" type="image/png" href="../Dubreuil services (1).png">
+    <link rel="icon" type="image/png" href="Dubreuil services (1).png">
     <style>
         :root {
             --void: #080808;
@@ -44,7 +44,7 @@
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 0 1.5rem;
             position: relative;
@@ -128,91 +128,123 @@
             width: 100%;
         }
 
-        nav a.active::after {
-            width: 100%;
-        }
-
-        .content {
-            padding: 2rem 0;
+        .article-container {
+            padding: 3rem 0;
             min-height: 60vh;
         }
 
-        .page-title {
-            font-size: 2.5rem;
-            font-weight: 300;
-            margin-bottom: 1rem;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-        }
-
-        .page-subtitle {
+        .article-meta {
+            font-size: 0.8rem;
             color: var(--accent-light);
-            font-size: 1rem;
-            margin-bottom: 3rem;
-            letter-spacing: 0.1em;
-        }
-
-        .articles-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 2rem;
-            margin: 2rem 0;
-        }
-
-        .article-card {
-            border: 1px solid var(--border);
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .article-card:hover {
-            border-color: var(--power);
-            transform: translateY(-5px);
-        }
-
-        .article-thumb {
-            width: 100%;
-            height: 200px;
-            background: #111;
-            border-bottom: 1px solid var(--border);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
-            justify-content: center;
-            color: var(--accent);
-            font-size: 1.5rem;
+            gap: 1rem;
         }
 
-        .article-body {
-            padding: 1.5rem;
-        }
-
-        .article-meta {
+        .live-badge {
+            background: #cc0000;
+            color: white;
+            padding: 0.1rem 0.4rem;
             font-size: 0.7rem;
-            color: var(--accent-light);
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            margin-bottom: 0.5rem;
+            font-weight: bold;
+            border-radius: 2px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.5;
+            }
         }
 
         .article-title {
-            font-size: 1.3rem;
-            font-weight: 400;
-            margin-bottom: 0.5rem;
-            line-height: 1.2;
+            font-size: 3rem;
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -0.02em;
         }
 
-        .article-excerpt {
-            font-size: 0.95rem;
-            color: #888;
-            line-height: 1.4;
+        .article-author {
+            font-size: 0.9rem;
+            color: var(--accent-light);
+            margin-bottom: 2rem;
+        }
+
+        .article-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #ccc;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .article-content h2 {
+            font-size: 2rem;
+            font-weight: 400;
+            margin: 2rem 0 1rem;
+            color: var(--power);
+        }
+
+        .article-content h3 {
+            font-size: 1.5rem;
+            font-weight: 400;
+            margin: 1.5rem 0 1rem;
+            color: var(--power);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 4rem 0;
+            font-size: 1.2rem;
+            color: var(--accent-light);
+        }
+
+        .error {
+            text-align: center;
+            padding: 4rem 0;
+        }
+
+        .error h2 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: #cc0000;
+        }
+
+        .error p {
+            color: var(--accent-light);
+            margin-bottom: 2rem;
+        }
+
+        .error a {
+            color: var(--power);
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            border: 1px solid var(--power);
+            display: inline-block;
+            transition: background 0.3s;
+        }
+
+        .error a:hover {
+            background: var(--power);
+            color: var(--void);
         }
 
         footer {
             border-top: 1px solid var(--accent);
             padding: 3rem 0;
             background: rgba(8, 8, 8, 0.9);
-            position: relative;
-            z-index: 10;
             margin-top: 4rem;
         }
 
@@ -243,8 +275,8 @@
         }
 
         @media (max-width: 768px) {
-            .articles-grid {
-                grid-template-columns: 1fr;
+            .article-title {
+                font-size: 2rem;
             }
 
             .main-header {
@@ -257,62 +289,50 @@
                 justify-content: center;
                 gap: 1rem;
             }
-
-            .page-title {
-                font-size: 1.8rem;
-            }
         }
     </style>
 </head>
 
 <body>
     <canvas id="matrix"></canvas>
+
     <header>
         <div class="container">
             <div class="top-bar">
-                <div class="date">Saturday, November 29, 2025</div>
+                <div class="date" id="currentDate"></div>
                 <div class="top-links">
-                    <a href="../subscribe/index.html">Subscribe</a>
-                    <a href="../login/loginpage.html">Login</a>
+                    <a href="subscribe/index.html">Subscribe</a>
+                    <a href="login/loginpage.html">Login</a>
                 </div>
             </div>
             <div class="main-header">
-                <a href="../index.html" class="logo">AMBILATRES</a>
+                <a href="index.html" class="logo">AMBILATRES</a>
                 <nav>
-                    <a href="../latest/index.html">Latest</a>
-                    <a href="index.html" class="active">Business</a>
-                    <a href="../technology/index.html">Technology</a>
-                    <a href="../politics/index.html">Politics</a>
-                    <a href="../culture/index.html">Culture</a>
-                    <a href="../science/index.html">Science</a>
+                    <a href="latest/index.html">Latest</a>
+                    <a href="business/index.html">Business</a>
+                    <a href="technology/index.html">Technology</a>
+                    <a href="politics/index.html">Politics</a>
+                    <a href="culture/index.html">Culture</a>
+                    <a href="science/index.html">Science</a>
                 </nav>
             </div>
         </div>
     </header>
 
     <div class="container">
-        <section class="content">
-            <h1 class="page-title">Business</h1>
-            <p class="page-subtitle">Financial markets, corporate news, and economic trends worldwide</p>
-
-            <div class="articles-grid" id="articlesContainer">
-                <!-- Articles will be loaded dynamically -->
-                <div class="loading"
-                    style="grid-column: 1/-1; text-align: center; padding: 2rem; color: var(--accent-light);">
-                    Loading articles...
-                </div>
-            </div>
-        </section>
+        <article class="article-container" id="articleContainer">
+            <div class="loading">Loading article...</div>
+        </article>
     </div>
 
     <footer>
         <div class="container">
             <div class="footer-content">
                 <div class="footer-links">
-                    <a href="../about/index.html">About Us</a>
-                    <a href="../privacy/index.html">Privacy Policy</a>
-                    <a href="../terms/index.html">Terms</a>
                     <a href="mailto:contact@ambilatres.com">Contact</a>
+                    <a href="about/index.html">About Us</a>
+                    <a href="privacy/index.html">Privacy Policy</a>
+                    <a href="terms/index.html">Terms</a>
                 </div>
                 <div class="coords">22°17'56"N 114°10'20"E</div>
             </div>
@@ -322,9 +342,20 @@
     <!-- Firebase (Analytics) -->
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-analytics-compat.js"></script>
-    <script src="../js/firebase-config.js"></script>
-    <script src="../js/articles-display.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/api-client.js"></script>
     <script>
+        // Set current date
+        function setCurrentDate() {
+            const dateElement = document.getElementById('currentDate');
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = now.toLocaleDateString('en-US', options);
+            dateElement.textContent = formattedDate;
+        }
+        setCurrentDate();
+
+        // Matrix background animation
         const canvas = document.getElementById('matrix');
         const ctx = canvas.getContext('2d');
         canvas.width = window.innerWidth;
@@ -333,6 +364,7 @@
         const fontSize = 14;
         const columns = canvas.width / fontSize;
         const drops = new Array(Math.floor(columns)).fill(1);
+
         function draw() {
             ctx.fillStyle = 'rgba(8, 8, 8, 0.05)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -352,12 +384,29 @@
             canvas.height = window.innerHeight;
         });
 
-        // Charger les articles au chargement de la page
-        window.addEventListener('load', function () {
-            if (typeof articlesDisplay !== 'undefined') {
-                articlesDisplay.displayArticlesInContainer('articlesContainer', 'Business');
-            }
-        });
+        // Load article
+        async function loadArticle() {
+            const container = document.getElementById('articleContainer');
+
+            // Get article ID from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const minutes = Math.floor(diff / 60000);
+            const hours = Math.floor(minutes / 60);
+            const days = Math.floor(hours / 24);
+
+            if (minutes < 60) return `${minutes} minute${minutes > 1 ? 's' : ''} ago`;
+            if (hours < 24) return `${hours} hour${hours > 1 ? 's' : ''} ago`;
+            return `${days} day${days > 1 ? 's' : ''} ago`;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Load article when page loads
+        loadArticle();
     </script>
 </body>
 
