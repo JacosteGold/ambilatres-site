@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,7 +14,11 @@
             --accent: #333333;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         body {
             font-family: 'Darker Grotesque', sans-serif;
@@ -176,15 +181,14 @@
         }
     </style>
 </head>
+
 <body>
     <canvas id="matrix"></canvas>
     <div class="interface">
         <h1>AMBILATRES</h1>
         <form novalidate>
-            <input type="text" placeholder="LOGIN" required 
-                   data-error="LOGIN REQUIRED">
-            <input type="password" placeholder="PASSWORD" required
-                   data-error="ACCESS CODE REQUIRED">
+            <input type="text" placeholder="LOGIN" required data-error="LOGIN REQUIRED">
+            <input type="password" placeholder="PASSWORD" required data-error="ACCESS CODE REQUIRED">
             <button type="submit">ENTER</button>
         </form>
         <div class="nav-links">
@@ -198,6 +202,11 @@
         <a href="mailto:contact@ambilatres.com">contact@ambilatres.com</a>
     </div>
 
+    <!-- Firebase (Analytics) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-analytics-compat.js"></script>
+    <script src="../js/firebase-config.js"></script>
+    <script src="../admin/api.js"></script>
     <script>
         const canvas = document.getElementById('matrix');
         const ctx = canvas.getContext('2d');
@@ -207,43 +216,100 @@
 
         const chars = '杜脱脱喜欢小咪咪';
         const fontSize = 14;
-        const columns = canvas.width/fontSize;
+        const columns = canvas.width / fontSize;
         const drops = new Array(Math.floor(columns)).fill(1);
 
         function draw() {
             ctx.fillStyle = 'rgba(8, 8, 8, 0.05)';
             ctx.fillRect(0, 0, canvas.width, canvas.height);
-            
+
             ctx.fillStyle = '#222';
             ctx.font = `${fontSize}px "PingFang SC", "Microsoft YaHei", monospace`;
 
-            for(let i = 0; i < drops.length; i++) {
+            for (let i = 0; i < drops.length; i++) {
                 const text = chars[Math.floor(Math.random() * chars.length)];
                 ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                
-                if(drops[i] * fontSize > canvas.height && Math.random() > 0.95)
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.95)
                     drops[i] = 0;
-                
+
                 drops[i]++;
             }
         }
 
-        setInterval(draw, 25); // Faster animation
+        setInterval(draw, 25);
 
-        // Form validation
+        // Form validation and submission
         const form = document.querySelector('form');
         const inputs = form.querySelectorAll('input');
+        const errorMsg = document.createElement('div');
+        errorMsg.style.cssText = 'color: #cc0000; font-size: 0.8rem; margin-top: 1rem; text-align: center; letter-spacing: 0.1em;';
+        errorMsg.style.display = 'none';
+        form.appendChild(errorMsg);
+
+        const successMsg = document.createElement('div');
+        successMsg.style.cssText = 'color: #00c800; font-size: 0.8rem; margin-top: 1rem; text-align: center; letter-spacing: 0.1em;';
+        successMsg.style.display = 'none';
+        form.appendChild(successMsg);
 
         inputs.forEach(input => {
             input.addEventListener('invalid', (e) => {
                 e.preventDefault();
                 input.classList.add('invalid');
             });
-            
+
             input.addEventListener('input', () => {
                 input.classList.remove('invalid');
+                errorMsg.style.display = 'none';
+                successMsg.style.display = 'none';
             });
+        });
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Vérifier que l'API est chargée
+            if (typeof ambilatresAPI === 'undefined') {
+                errorMsg.textContent = 'Erreur: API non chargée. Rechargez la page.';
+                errorMsg.style.display = 'block';
+                return;
+            }
+
+            const username = inputs[0].value.trim();
+            const password = inputs[1].value;
+
+            if (!username || !password) {
+                errorMsg.textContent = 'Veuillez remplir tous les champs';
+                errorMsg.style.display = 'block';
+                return;
+            }
+
+            // Désactiver le bouton pendant la requête
+            const submitBtn = form.querySelector('button');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'CONNEXION...';
+
+            try {
+                const result = await ambilatresAPI.auth.login(username, password);
+                
+                // Sauvegarder le token et les infos utilisateur
+                localStorage.setItem('ambilatres_token', result.token);
+                localStorage.setItem('ambilatres_user', JSON.stringify(result.user));
+                
+                successMsg.textContent = 'Connexion réussie, redirection...';
+                successMsg.style.display = 'block';
+                
+                setTimeout(() => {
+                    window.location.replace('../admin/dashboard.html');
+                }, 500);
+            } catch (error) {
+                errorMsg.textContent = error.message || 'Identifiants incorrects';
+                errorMsg.style.display = 'block';
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'ENTER';
+            }
         });
     </script>
 </body>
+
 </html>

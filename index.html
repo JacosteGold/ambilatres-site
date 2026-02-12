@@ -418,7 +418,7 @@
     <header>
         <div class="container">
             <div class="top-bar">
-                <div class="date">Saturday, November 29, 2025</div>
+                <div class="date" id="currentDate"></div>
                 <div class="top-links">
                     <a href="subscribe/index.html">Subscribe</a>
                     <a href="login/loginpage.html">Login</a>
@@ -452,7 +452,8 @@
     </div>
 
     <div class="container">
-        <section class="hero">
+        <div id="featuredHero"></div>
+        <section class="hero" id="defaultHero">
             <div class="hero-content">
                 <div class="hero-text">
                     <div class="meta"><span class="live-tag">LIVE</span> Business • Global Markets</div>
@@ -468,6 +469,7 @@
         <div class="main-grid">
             <div class="main-column">
                 <div class="section-title">Latest Stories</div>
+                <div id="latestArticlesContainer"></div>
 
                 <article class="article-card">
                     <div class="article-thumb">
@@ -569,6 +571,24 @@
         </div>
     </footer>
 
+    <!-- Firebase (Analytics) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-analytics-compat.js"></script>
+    <script src="js/firebase-config.js"></script>
+    <script src="js/articles-display.js"></script>
+    <script>
+        // Set current date
+        function setCurrentDate() {
+            const dateElement = document.getElementById('currentDate');
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = now.toLocaleDateString('en-US', options);
+            dateElement.textContent = formattedDate;
+        }
+
+        // Set date immediately
+        setCurrentDate();
+    </script>
     <script>
         const canvas = document.getElementById('matrix');
         const ctx = canvas.getContext('2d');
@@ -606,8 +626,27 @@
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         });
+
+        // Charger les articles au chargement de la page
+        window.addEventListener('load', async function () {
+            if (typeof articlesDisplay !== 'undefined') {
+                try {
+                    // Afficher l'article featured en hero si disponible
+                    const featured = await articlesDisplay.getFeaturedArticles();
+                    if (featured.length > 0) {
+                        const defaultHero = document.getElementById('defaultHero');
+                        if (defaultHero) defaultHero.style.display = 'none';
+                        await articlesDisplay.displayFeaturedOnHomepage('featuredHero');
+                    }
+
+                    // Afficher les derniers articles
+                    await articlesDisplay.displayArticlesInContainer('latestArticlesContainer', null, false, 5);
+                } catch (error) {
+                    console.error('Erreur lors du chargement des articles:', error);
+                }
+            }
+        });
     </script>
 </body>
 
 </html>
-
