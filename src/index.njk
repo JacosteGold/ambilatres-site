@@ -1,8 +1,8 @@
 ---
-layout: layouts/base.njk
 title: Global News & Analysis
 description: News, analysis and essays on business, finance, technology, politics, culture and science.
 ---
+{% extends "layouts/base.njk" %}
 
 {% set extraCss %}
 .hero { border-bottom: 1px solid var(--accent); padding: 3rem 0 2rem; margin-bottom: 2rem; }
@@ -33,6 +33,7 @@ description: News, analysis and essays on business, finance, technology, politic
 }
 {% endset %}
 
+{% block content %}
 {% set featured = collections.articles[0] %}
 {% set latest = collections.articles | slice(0, 6) %}
 
@@ -78,3 +79,4 @@ description: News, analysis and essays on business, finance, technology, politic
     </div>
 
 </div>
+{% endblock %}
