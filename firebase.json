@@ -1,23 +1,16 @@
 {
   "hosting": {
-    "public": ".",
+    "public": "_site",
     "ignore": [
       "firebase.json",
       "**/.*",
-      "**/node_modules/**",
-      "**/database/*.db",
-      "*.md",
-      "server.js",
-      "package.json",
-      "package-lock.json",
-      "routes",
-      "middleware",
-      "database",
-      "utils",
-      "test_*.js",
-      ".env",
-      ".env.example",
-      ".github"
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/404.html"
+      }
     ]
   }
 }

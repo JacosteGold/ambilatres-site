@@ -1,0 +1,74 @@
+{% extends "layouts/base.njk" %}
+
+{% set extraCss %}
+.article-wrap { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
+.article-container { padding: 3rem 0 5rem; }
+.article-meta-top { font-size: 0.8rem; color: var(--accent-light); text-transform: uppercase; letter-spacing: 0.2em; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+.cat-badge { background: var(--red); color: white; padding: 0.15rem 0.5rem; font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em; border-radius: 2px; }
+.article-title { font-size: 2.8rem; font-weight: 300; line-height: 1.1; margin-bottom: 1rem; letter-spacing: -0.02em; }
+.article-subtitle { font-size: 1.2rem; font-weight: 300; font-style: italic; color: var(--accent-light); margin-bottom: 0.75rem; line-height: 1.5; }
+.article-byline { font-size: 0.85rem; color: var(--accent-light); margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+.article-content { font-size: 1.05rem; line-height: 1.85; color: #ccc; }
+.article-content p { margin-bottom: 1.4rem; }
+.article-content strong { color: var(--power); font-weight: 600; }
+.article-content em { font-style: italic; }
+.article-content h2 { font-size: 1.9rem; font-weight: 300; margin: 3rem 0 1.2rem; color: var(--power); border-top: 1px solid var(--border); padding-top: 2rem; }
+.article-content h3 { font-size: 1.25rem; font-weight: 400; margin: 2rem 0 0.8rem; color: var(--red); font-style: italic; }
+.article-content h4 { font-size: 1.05rem; font-weight: 600; margin: 1.5rem 0 0.5rem; color: var(--power); font-style: italic; }
+.article-content ul, .article-content ol { padding-left: 1.5rem; margin-bottom: 1.4rem; }
+.article-content li { margin-bottom: 0.6rem; }
+.article-content blockquote { border-left: 2px solid var(--red); padding: 1rem 1.5rem; margin: 2rem 0; background: rgba(255,255,255,0.02); font-style: italic; color: #bbb; font-size: 0.95rem; line-height: 1.8; }
+.article-content table { width: 100%; border-collapse: collapse; margin: 2rem 0; font-size: 0.9rem; }
+.article-content th { background: rgba(139,26,26,0.3); color: var(--power); font-weight: 600; padding: 0.7rem 1rem; text-align: left; border: 1px solid rgba(255,255,255,0.1); }
+.article-content td { padding: 0.65rem 1rem; border: 1px solid rgba(255,255,255,0.07); color: #ccc; }
+.article-content tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+.article-content a { color: #aaa; text-decoration: underline; }
+.article-content a:hover { color: var(--power); }
+.article-content hr { border: none; border-top: 1px solid var(--border); margin: 2rem 0; }
+.article-tags { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--border); display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.tag { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-light); border: 1px solid var(--accent); padding: 0.2rem 0.6rem; }
+@media (max-width: 768px) { .article-title { font-size: 2rem; } }
+{% endset %}
+
+{% block head %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "{{ title }}",
+  "description": "{{ excerpt }}",
+  "author": { "@type": "Person", "name": "{{ author }}" },
+  "datePublished": "{{ date | dateISO }}",
+  "publisher": { "@type": "Organization", "name": "{{ site.title }}", "url": "{{ site.url }}" },
+  "url": "{{ site.url }}{{ page.url }}"
+}
+</script>
+{% endblock %}
+
+{% block content %}
+<div class="article-wrap">
+    <article class="article-container">
+        <div class="article-meta-top">
+            {% if badge %}<span class="cat-badge">{{ badge }}</span>{% else %}<span class="cat-badge">{{ category | upper }}</span>{% endif %}
+            <span>{{ date | dateFR }}</span>
+            {% if readingTime %}<span>{{ readingTime }} min de lecture</span>{% endif %}
+        </div>
+
+        <h1 class="article-title">{{ title }}</h1>
+        {% if subtitle %}<div class="article-subtitle">{{ subtitle }}</div>{% endif %}
+        <div class="article-byline">Par <strong>{{ author }}</strong>{% if authorRole %} — {{ authorRole }}{% endif %}</div>
+
+        <div class="article-content">
+            {{ content | safe }}
+        </div>
+
+        {% if tags %}
+        <div class="article-tags">
+            {% for tag in tags %}
+            <span class="tag">{{ tag }}</span>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </article>
+</div>
+{% endblock %}
