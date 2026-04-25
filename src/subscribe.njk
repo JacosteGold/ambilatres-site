@@ -1,0 +1,49 @@
+---
+layout: layouts/base.njk
+title: Subscribe
+permalink: /subscribe/
+description: S'abonner à la newsletter AMBILATRES — recevoir nos analyses et essais en avant-première.
+---
+
+{% set extraCss %}
+.sub-wrap { max-width: 640px; margin: 0 auto; padding: 4rem 1.5rem 6rem; }
+.sub-label { font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--red); margin-bottom: 1rem; font-weight: 700; }
+.sub-title { font-size: 2.5rem; font-weight: 300; line-height: 1.1; margin-bottom: 1.5rem; letter-spacing: -0.01em; }
+.sub-lede { font-size: 1.1rem; line-height: 1.7; color: #bbb; margin-bottom: 2.5rem; }
+.sub-form { display: flex; gap: 0.5rem; margin-bottom: 1rem; }
+.sub-form input { flex: 1; background: transparent; border: 1px solid var(--accent); color: var(--power); padding: 0.85rem 1rem; font-family: inherit; font-size: 1rem; outline: none; transition: border-color 0.3s; }
+.sub-form input:focus { border-color: var(--power); }
+.sub-form button { background: var(--power); color: var(--void); border: none; padding: 0.85rem 1.5rem; font-family: inherit; font-size: 0.9rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: opacity 0.3s; }
+.sub-form button:hover { opacity: 0.85; }
+.sub-fineprint { font-size: 0.8rem; color: var(--accent-light); line-height: 1.6; margin-top: 1.5rem; }
+.sub-list { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid var(--border); }
+.sub-list h3 { font-size: 0.75rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent-light); margin-bottom: 1rem; font-weight: 700; }
+.sub-list ul { list-style: none; padding: 0; }
+.sub-list li { padding: 0.6rem 0; color: #aaa; font-size: 0.95rem; border-bottom: 1px solid var(--border); }
+.sub-list li::before { content: "→ "; color: var(--red); margin-right: 0.5rem; }
+@media (max-width: 600px) { .sub-form { flex-direction: column; } .sub-title { font-size: 1.8rem; } }
+{% endset %}
+
+{% block content %}
+<div class="sub-wrap">
+    <div class="sub-label">Newsletter</div>
+    <h1 class="sub-title">Recevoir les prochains essais</h1>
+    <p class="sub-lede">Une newsletter sans bruit. Les analyses et essais d'AMBILATRES envoyés directement par email à leur publication. Pas de spam, désabonnement en un clic.</p>
+
+    <form class="sub-form" action="https://app.brevo.com/PLACEHOLDER" method="post" target="_blank">
+        <input type="email" name="email" placeholder="votre@email.com" required>
+        <button type="submit">S'abonner</button>
+    </form>
+
+    <p class="sub-fineprint">En vous abonnant, vous acceptez de recevoir des emails d'AMBILATRES. Vos données ne sont jamais partagées avec des tiers. Voir la <a href="/privacy/" style="color:#aaa;">politique de confidentialité</a>.</p>
+
+    <div class="sub-list">
+        <h3>À quoi t'attendre</h3>
+        <ul>
+            <li>Essais long-form sur la finance, la tech, la politique, la culture et la science</li>
+            <li>Analyses transdisciplinaires, cadrées par la théorie</li>
+            <li>1 à 2 envois par mois — qualité avant fréquence</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

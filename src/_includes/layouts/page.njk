@@ -1,0 +1,30 @@
+{% extends "layouts/base.njk" %}
+
+{% set extraCss %}
+.page-wrap { max-width: 800px; margin: 0 auto; padding: 0 1.5rem; }
+.page-container { padding: 3rem 0 5rem; }
+.page-title { font-size: 2.5rem; font-weight: 300; line-height: 1.1; margin-bottom: 0.75rem; letter-spacing: -0.02em; }
+.page-meta { font-size: 0.85rem; color: var(--accent-light); margin-bottom: 2.5rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); letter-spacing: 0.05em; }
+.page-content { font-size: 1.05rem; line-height: 1.8; color: #ccc; }
+.page-content p { margin-bottom: 1.3rem; }
+.page-content h2 { font-size: 1.5rem; font-weight: 400; margin: 2.5rem 0 1rem; color: var(--power); }
+.page-content h3 { font-size: 1.15rem; font-weight: 500; margin: 1.8rem 0 0.6rem; color: var(--power); }
+.page-content ul, .page-content ol { padding-left: 1.5rem; margin-bottom: 1.3rem; }
+.page-content li { margin-bottom: 0.45rem; }
+.page-content a { color: var(--power); text-decoration: underline; }
+.page-content a:hover { opacity: 0.7; }
+.page-content strong { color: var(--power); }
+@media (max-width: 768px) { .page-title { font-size: 1.8rem; } }
+{% endset %}
+
+{% block content %}
+<div class="page-wrap">
+    <article class="page-container">
+        <h1 class="page-title">{{ title }}</h1>
+        {% if lastUpdated %}<div class="page-meta">Last Updated: {{ lastUpdated }}</div>{% endif %}
+        <div class="page-content">
+            {{ content | safe }}
+        </div>
+    </article>
+</div>
+{% endblock %}
