@@ -1,0 +1,214 @@
+---
+title: Login
+permalink: /login/
+description: Espace membre AMBILATRES.
+eleventyExcludeFromCollections: true
+layout: false
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login — AMBILATRES</title>
+    <link href="https://fonts.googleapis.com/css2?family=Darker+Grotesque:wght@300;600&display=swap" rel="stylesheet">
+    <link rel="icon" href="/logo3d.ico">
+    <style>
+        :root {
+            --void: #080808;
+            --power: #ffffff;
+            --accent: #333333;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Darker Grotesque', sans-serif;
+            background: var(--void);
+            color: var(--power);
+            min-height: 100vh;
+            display: grid;
+            place-items: center;
+            padding: 1.5rem;
+        }
+
+        canvas {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 0;
+            opacity: 0.07;
+            pointer-events: none;
+            filter: blur(0.5px);
+        }
+
+        .interface {
+            z-index: 1;
+            width: 100%;
+            max-width: 320px;
+            position: relative;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            font-weight: 300;
+            letter-spacing: 0.5em;
+            margin-bottom: 3rem;
+            margin-left: -0.25em;
+            transform: translateX(calc(-50% + 160px));
+        }
+
+        form {
+            background: var(--void);
+            border-left: 1px solid var(--accent);
+            padding-left: 1.5rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.75rem 0;
+            background: transparent;
+            border: none;
+            border-bottom: 1px solid var(--accent);
+            color: var(--power);
+            font-family: inherit;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            transition: border-color 0.3s;
+        }
+
+        input:focus { outline: none; border-color: var(--power); }
+        input::placeholder { color: var(--accent); letter-spacing: 0.1em; }
+        input:invalid { box-shadow: none; }
+        input:required {
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3E%3Ccircle cx='4' cy='4' r='3' fill='none' stroke='%23333' stroke-width='0.75'/%3E%3C/svg%3E") calc(100% - 8px) center no-repeat;
+        }
+
+        button {
+            width: 100%;
+            padding: 0.75rem;
+            background: var(--power);
+            color: var(--void);
+            border: none;
+            font-family: inherit;
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+
+        .nav-links {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--accent);
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--power); }
+
+        .coords {
+            position: fixed;
+            bottom: 1.5rem; right: 1.5rem;
+            font-size: 0.7rem;
+            color: var(--accent);
+            font-weight: 300;
+            letter-spacing: 0.1em;
+        }
+
+        .contact {
+            position: fixed;
+            bottom: 1.5rem; left: 1.5rem;
+            font-size: 0.7rem;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+        }
+
+        .contact a {
+            color: rgba(255, 255, 255, 0.4);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact a:hover { color: var(--power); }
+
+        @media (max-width: 480px) {
+            h1 { transform: none; margin-left: 0; font-size: 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="matrix"></canvas>
+    <div class="interface">
+        <h1>AMBILATRES</h1>
+        <form novalidate>
+            <input type="text" placeholder="LOGIN" required data-error="LOGIN REQUIRED">
+            <input type="password" placeholder="PASSWORD" required data-error="ACCESS CODE REQUIRED">
+            <button type="submit">ENTER</button>
+        </form>
+        <div class="nav-links">
+            <a href="/">← Back to Home</a>
+            <a href="/subscribe/">Subscribe</a>
+            <a href="/about/">About</a>
+        </div>
+    </div>
+    <div class="coords">22°17'56"N 114°10'20"E</div>
+    <div class="contact">
+        <a href="mailto:contact@ambilatres.com">contact@ambilatres.com</a>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const chars = '杜脱脱喜欢小咪咪';
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = new Array(Math.floor(columns)).fill(1);
+        function draw() {
+            ctx.fillStyle = 'rgba(8, 8, 8, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#222';
+            ctx.font = `${fontSize}px "PingFang SC", "Microsoft YaHei", monospace`;
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.95) drops[i] = 0;
+                drops[i]++;
+            }
+        }
+        setInterval(draw, 25);
+
+        const form = document.querySelector('form');
+        const inputs = form.querySelectorAll('input');
+        const errorMsg = document.createElement('div');
+        errorMsg.style.cssText = 'color: #cc0000; font-size: 0.8rem; margin-top: 1rem; text-align: center; letter-spacing: 0.1em;';
+        errorMsg.style.display = 'none';
+        form.appendChild(errorMsg);
+
+        inputs.forEach(input => {
+            input.addEventListener('invalid', (e) => { e.preventDefault(); input.classList.add('invalid'); });
+            input.addEventListener('input', () => { input.classList.remove('invalid'); errorMsg.style.display = 'none'; });
+        });
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            errorMsg.textContent = 'AUTH SERVICE OFFLINE';
+            errorMsg.style.display = 'block';
+        });
+    </script>
+</body>
+</html>
