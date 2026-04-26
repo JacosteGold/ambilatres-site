@@ -51,7 +51,7 @@
         <div class="article-meta-top">
             {% if badge %}<span class="cat-badge">{{ badge }}</span>{% else %}<span class="cat-badge">{{ category | upper }}</span>{% endif %}
             <span>{{ date | dateFR }}</span>
-            {% if readingTime %}<span>{{ readingTime }} min de lecture</span>{% endif %}
+            <span>{{ readingTime or (content | readingTime) }} min de lecture</span>
         </div>
 
         <h1 class="article-title">{{ title }}</h1>

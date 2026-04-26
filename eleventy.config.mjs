@@ -45,6 +45,14 @@ export default function(eleventyConfig) {
         DateTime.fromJSDate(date, { zone: "utc" }).toFormat("yyyy-MM-dd")
     );
 
+    // Reading time: 220 wpm (lecture FR moyenne pour texte dense)
+    eleventyConfig.addFilter("readingTime", html => {
+        if (!html) return 0;
+        const text = String(html).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+        const words = text ? text.split(" ").length : 0;
+        return Math.max(1, Math.ceil(words / 220));
+    });
+
     return {
         dir: {
             input: "src",

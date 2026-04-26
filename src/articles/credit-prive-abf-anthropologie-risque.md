@@ -8,7 +8,6 @@ authorRole: Ambilatres
 date: 2026-04-25
 category: Business
 badge: ESSAI
-readingTime: 31
 tags:
   - crédit privé
   - Asset-Based Finance
