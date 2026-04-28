@@ -6,11 +6,7 @@ module.exports = {
     email: "contact@ambilatres.com",
     language: "fr",
     nav: [
-        { label: "Latest",     url: "/latest/" },
-        { label: "Business",   url: "/business/" },
-        { label: "Technology", url: "/technology/" },
-        { label: "Politics",   url: "/politics/" },
-        { label: "Culture",    url: "/culture/" },
-        { label: "Science",    url: "/science/" }
+        { label: "Latest", url: "/latest/" },
+        { label: "About",  url: "/about/" }
     ]
 };

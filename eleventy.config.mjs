@@ -16,15 +16,6 @@ export default function(eleventyConfig) {
         col.getFilteredByGlob("src/articles/*.md").sort((a, b) => b.date - a.date)
     );
 
-    // Collections par catégorie
-    ["Business", "Technology", "Politics", "Culture", "Science"].forEach(cat => {
-        eleventyConfig.addCollection(cat.toLowerCase(), col =>
-            col.getFilteredByGlob("src/articles/*.md")
-               .filter(a => a.data.category === cat)
-               .sort((a, b) => b.date - a.date)
-        );
-    });
-
     // Filtre date en français
     eleventyConfig.addFilter("dateFR", date =>
         DateTime.fromJSDate(date, { zone: "utc" }).setLocale("fr").toFormat("d LLLL yyyy")

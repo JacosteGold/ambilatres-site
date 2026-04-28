@@ -1,8 +1,51 @@
 ---
-layout: layouts/category.njk
 title: Latest
-description: Tous les articles récents, toutes catégories confondues.
-categoryLabel: Latest
-categoryDesc: Tous les articles récents, toutes catégories confondues.
+description: Tous les essais publiés, du plus récent au plus ancien.
+permalink: /latest/
 ---
-{% set articles = collections.articles %}
+{% extends "layouts/base.njk" %}
+
+{% set extraCss %}
+.latest-wrap { max-width: 880px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+.latest-label { font-size: 0.72rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--red); margin-bottom: 1rem; font-weight: 700; }
+.latest-title { font-size: 2.5rem; font-weight: 300; line-height: 1.1; margin-bottom: 0.75rem; letter-spacing: -0.02em; }
+.latest-desc { color: var(--accent-light); font-size: 1rem; margin-bottom: 3rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+.latest-list { list-style: none; padding: 0; }
+.latest-item { padding: 1.75rem 0; border-bottom: 1px solid var(--border); }
+.latest-item:last-child { border-bottom: none; }
+.latest-item a { text-decoration: none; color: inherit; display: block; transition: opacity 0.2s; }
+.latest-item a:hover { opacity: 0.75; }
+.item-meta { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent-light); margin-bottom: 0.5rem; }
+.item-meta .item-cat { color: var(--red); font-weight: 700; margin-right: 0.75rem; }
+.item-title { font-size: 1.45rem; font-weight: 400; line-height: 1.3; margin-bottom: 0.5rem; color: var(--power); }
+.item-excerpt { font-size: 0.95rem; color: #aaa; line-height: 1.6; }
+.empty { text-align: center; padding: 4rem; color: var(--accent-light); }
+@media (max-width: 600px) { .latest-title { font-size: 1.8rem; } .item-title { font-size: 1.2rem; } }
+{% endset %}
+
+{% block content %}
+<div class="latest-wrap">
+    <div class="latest-label">Archive</div>
+    <h1 class="latest-title">{{ title }}</h1>
+    <p class="latest-desc">{{ description }}</p>
+
+    {% if collections.articles.length %}
+    <ul class="latest-list">
+        {% for article in collections.articles %}
+        <li class="latest-item">
+            <a href="{{ article.url }}">
+                <div class="item-meta">
+                    {% if article.data.category %}<span class="item-cat">{{ article.data.category }}</span>{% endif %}
+                    <span>{{ article.date | dateFR }}</span>
+                </div>
+                <h2 class="item-title">{{ article.data.title }}</h2>
+                <p class="item-excerpt">{{ article.data.excerpt | truncate(180) }}</p>
+            </a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <div class="empty">Aucun essai publié pour l'instant.</div>
+    {% endif %}
+</div>
+{% endblock %}
