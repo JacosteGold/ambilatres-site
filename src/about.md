@@ -1,30 +1,29 @@
 ---
 layout: layouts/page.njk
-title: About Us
+title: About
 permalink: /about/
-description: AMBILATRES — global news, analysis and essays. Our mission, values, and editorial team.
+description: AMBILATRES — une revue d'essais transdisciplinaires sur l'actualité économique, politique, technologique et culturelle.
 ---
 
-## Our Mission
+## Une revue d'essais transdisciplinaires
 
-AMBILATRES is committed to delivering comprehensive, accurate, and timely global news coverage across all major categories including business, technology, politics, culture, and science. We believe in providing our readers with the information they need to understand and navigate an increasingly complex world.
+AMBILATRES publie des essais d'analyse longs sur l'actualité économique, politique, technologique et culturelle. La ligne éditoriale n'est pas celle d'un site de news : c'est celle d'une revue de réflexion qui refuse les compartiments disciplinaires.
 
-## Our Vision
+## Le parti pris
 
-We envision a world where quality journalism bridges the gap between local and global perspectives. Through innovative reporting and in-depth analysis, we strive to inform, educate, and inspire our global audience.
+Comprendre les phénomènes contemporains exige rarement de rester dans un seul registre. Une recomposition financière engage simultanément des infrastructures juridiques, des architectures institutionnelles et une anthropologie implicite du risque. Une mutation technologique articule industrie, géopolitique, esthétique et économie politique. Une décision politique s'inscrit dans des héritages théologiques, des contraintes constitutionnelles, des sociologies de l'opinion.
 
-## Core Values
+Chaque essai d'AMBILATRES mobilise explicitement ces couches — théorie économique, sociologie, histoire des idées, droit, anthropologie — pour produire des lectures **intégrées** plutôt que sectorielles.
 
-Integrity, accuracy, and independence are at the heart of everything we do. We maintain rigorous editorial standards to ensure our reporting is fair, balanced, and factual. Our commitment to transparency and accountability guides every story we publish.
+## La méthode
 
-## Editorial Team
+- **Format long.** Les essais font typiquement 5 000 à 10 000 mots. Le format court n'est pas adapté à ce qu'on cherche à faire ici.
+- **Sources explicites.** Données institutionnelles (FMI, BRI, FSB, Eurostat), recherche académique citée, théorie nommée. Pas d'opinion non étayée.
+- **Argument plutôt que reportage.** AMBILATRES n'est pas une rédaction de news. Chaque pièce défend une thèse construite et l'expose dans son architecture.
+- **Bibliographie systématique.** Les références sont disponibles en fin de chaque essai pour permettre au lecteur de prolonger.
 
-Our team of experienced journalists, editors, and correspondents brings decades of combined experience covering global events. We maintain bureaus in major cities worldwide to ensure on-the-ground reporting and diverse perspectives.
+## Auteur
 
-## Technology & Innovation
+Les essais sont signés [Thomas Dubreuil](mailto:contact@ambilatres.com). Pour proposer un sujet, une critique, ou une discussion : [contact@ambilatres.com](mailto:contact@ambilatres.com).
 
-AMBILATRES leverages cutting-edge technology to deliver news across multiple platforms. From traditional web coverage to emerging digital formats, we're constantly innovating to reach and engage our audience wherever they are.
-
-## Contact Us
-
-For news tips, press inquiries, or general questions, please reach out to us at [contact@ambilatres.com](mailto:contact@ambilatres.com).
+Pour être notifié des prochaines parutions, [s'abonner à la newsletter](/subscribe/).
